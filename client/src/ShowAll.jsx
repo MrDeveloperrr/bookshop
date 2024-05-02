@@ -27,12 +27,15 @@ const ShowAll = () => {
     return (
         <>
             <p>Books Found: {allBooks.length}</p>
-            {allBooks.map(book => {
-                return (
-                    <ShowBook key={book._id} book={book} />
-                )
-            }
-            )}
+            <div className="flex flex-row flex-wrap justify-around gap-y-8" >
+
+                {allBooks.map(book => {
+                    return (
+                        <ShowBook key={book._id} book={book} />
+                    )
+                }
+                )}
+            </div>
 
         </>
 

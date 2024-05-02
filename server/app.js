@@ -59,17 +59,17 @@ app.post('/admin/savebook', (req, res) => {
     // Route adds a new book
     const data = req.body
     if (!data.title)
-        return res.status(400).send("No title found.")
+        return res.status(400).send({message:"No title found."})
     if (!data.author)
-        return res.status(400).send("No author found.")
+        return res.status(400).send({message:"No author found."})
     if (!data.price)
-        return res.status(400).send("No price found.")
+        return res.status(400).send({message:"No price found."})
 
     myBooks.insertOne(data)
-    .then(response=>{
-        return res.status(201).send(JSON.stringify(response))
-    })
-    .catch(err=>console.log(err))
+        .then(response => {
+            return res.status(201).send(JSON.stringify(response))
+        })
+        .catch(err => console.log(err))
 })
 
 app.delete('/admin/remove/:id', (req, res) => {
@@ -90,20 +90,20 @@ app.delete('/admin/remove/:id', (req, res) => {
 app.put('/admin/update/:id/', (req, res) => {
     const data = req.params
     const docData = req.body
-    
+
     const filter = {
         "_id": new ObjectId(data.id)
     }
 
     const updDoc = {
         $set: {
-           ...docData //docData.price, docData.cover
+            ...docData //docData.price, docData.cover
         }
     }
 
     myBooks.updateOne(filter, updDoc)
-    .then(response=>{
-        res.status(200).send(response)
-    })
-    .catch(err=>console.log(err))
+        .then(response => {
+            res.status(200).send(response)
+        })
+        .catch(err => console.log(err))
 })

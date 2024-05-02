@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ShowAll from './ShowAll'
-import ShowBook from './ShowBook'
+import AddBook from './AddBook'
 
 
 function App() {
@@ -8,9 +8,10 @@ function App() {
 
   return (
     <>
-    <h1 className='text-amber-500 text-9xl text-center'>WHALECUM</h1>
-    <ShowAll />
-    <ShowBook/>
+    <h1 className='text-amber-500 text-9xl text-center'>BookSource</h1>
+    <AddBook/>
+    <ShowAll/>
+    
     </>
   ) 
 }
