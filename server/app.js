@@ -94,7 +94,8 @@ app.put('/admin/update/:id/', (req, res) => {
     const filter = {
         "_id": new ObjectId(data.id)
     }
-
+    // Removes id key
+    delete docData._id
     const updDoc = {
         $set: {
             ...docData //docData.price, docData.cover
