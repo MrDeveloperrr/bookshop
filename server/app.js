@@ -59,11 +59,11 @@ app.post('/admin/savebook', (req, res) => {
     // Route adds a new book
     const data = req.body
     if (!data.title)
-        return res.status(400).send({message:"No title found."})
+        return res.status(400).send({ message: "No title found." })
     if (!data.author)
-        return res.status(400).send({message:"No author found."})
+        return res.status(400).send({ message: "No author found." })
     if (!data.price)
-        return res.status(400).send({message:"No price found."})
+        return res.status(400).send({ message: "No price found." })
 
     myBooks.insertOne(data)
         .then(response => {
@@ -104,7 +104,13 @@ app.put('/admin/update/:id/', (req, res) => {
 
     myBooks.updateOne(filter, updDoc)
         .then(response => {
-            res.status(200).send(response)
-        })
-        .catch(err => console.log(err))
+            // res.status(200).send(response)
+            let msg = {}
+            if (!response.matchedCount || !response.modifiedCount)
+    msg = { message: "Something's Wrong Here!." }
+            else
+    msg = { message: "Update Successful." }
+    res.status(200).send(msg)
+        })  
+    .catch(err => console.log(err))
 })
